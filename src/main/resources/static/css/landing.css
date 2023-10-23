@@ -1,0 +1,201 @@
+body {
+  background: rgb(224, 224, 224);
+  background: black;
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+a {
+  text-decoration: none !important;
+  color:white;
+}
+
+
+.container {
+  margin-top: 10px;
+}
+
+.btn-log {
+margin:10px}
+
+.game-card {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.game-card .card .game-img {
+  max-width: 100%; /* Asegura que la imagen no sea más ancha que su contenedor */
+  max-height: 100%; /* Asegura que la imagen no sea más alta que su contenedor */
+  object-fit: contain; /* Mantiene la relación de aspecto y ajusta la imagen sin distorsión */
+
+}
+
+.game-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.game-details {
+  font-size: 1rem;
+  color: #777;
+}
+
+.game-price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+.btn-add-game {
+  margin-top: 20px;
+}
+
+/* Estilo para el modal principal */
+.modal {
+  display: none; /* Oculta el modal por defecto */
+  position: fixed; /* Mantiene el modal en la misma posición en la página */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilo para el contenido del modal */
+.modal-content {
+ color: black;
+  margin: 10% auto; /* Centra el modal verticalmente */
+  padding: 20px;
+  width: 80%;
+}
+
+.modal-header .btn-close {
+  color: white; /* Establecer el color blanco */
+  opacity: 1; /* Asegurarse de que las aspas de cierre sean completamente visibles */
+  font-size: 16px; /* Tamaño de fuente opcional */
+  font-weight: bold; /* Puedes ajustar la fuente según tus preferencias */
+}
+
+/* Cambiar el color del botón de cierre al pasar el cursor (opcional) */
+.modal-header .btn-close:hover,
+.modal-header .btn-close:focus {
+  color: white; /* Establecer el color blanco al pasar el cursor o enfocar */
+  text-decoration: none; /* Eliminar la decoración de texto al pasar el cursor o enfocar */
+  cursor: pointer; /* Cambiar el cursor al pasar el cursor o enfocar */
+}
+
+.btn-container {
+  margin-top: 20px;
+}
+
+.custom-link {
+  font-family: "Pacifico", cursive;
+  background-color: #ffd700;
+  color: black; /* Cambia el color del texto a negro */
+  /* Puedes agregar otros estilos según tus preferencias, como padding, bordes, etc. */
+  padding: 5px 10px; /* Ejemplo de ajuste de relleno */
+  border-radius: 5px; /* Ejemplo de borde redondeado */
+}
+
+.search-bar {
+  width: 300px; /* Ancho deseado en píxeles */
+  margin-left: 20px;
+}
+
+.card-footer {
+  padding: 0.5rem; /* Ajusta el espacio interno del footer */
+  height: 2rem; /* Ajusta la altura deseada */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:#333333;
+  color:white;
+}
+
+.card-body {
+  max-height: 35px; /* Ajusta la altura máxima según tus preferencias */
+  overflow: hidden; /* Oculta el contenido adicional si se desborda */
+  display: flex; /* Activa el modelo de caja flexible */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  text-align: center;
+  background-color:#333333;
+
+}
+
+
+.card-title {
+   font-size: 16px; /* Ajusta el tamaño del texto según tus preferencias */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  height: 100%; /* Ajusta la altura para que se alinee verticalmente */
+  text-align: center; /* Centra el texto horizontalmente */
+}
+
+.card-with-band {
+  position: relative;
+  padding-top: 5px; /* Ajusta el espacio en la parte superior para la banda */
+}
+
+
+/* Estilos para las tarjetas */
+.card.game-card {
+  position: relative; /* Para que la banda se posicione con respecto a la tarjeta */
+}
+
+.band {
+  font-family: 'Pacifico', cursive;
+  background-color: limegreen; /* Fondo verde lima */
+  position: absolute;
+  border-radius: 1px;
+  padding: 1px 3px; /* Ajusta el espaciado interno */
+  color: white; /* Color del texto */
+  font-size: 10px; /* Ajusta el tamaño de la fuente */
+  transform-origin: left top; /* Punto de origen para la rotación */
+  left: 3%; /* Coloca la banda en el borde izquierdo */
+  bottom:21%;
+
+
+}
+.rate {
+  /* float: left; */
+  /* display: inline-block; */
+  height: 36px;
+  display: inline-flex;
+  flex-direction: row-reverse; /* Esto invierte la dirección de los elementos internos */
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.rate:not(:checked) > input {
+  /* position: absolute; */
+  top: -9999px;
+  margin-left: -24px;
+  width: 20px;
+  padding-right: 14px;
+  z-index: -10;
+}
+
+.rate:not(:checked) > label {
+  float: right; /* Hace que las estrellas se muestren en sentido inverso */
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc; /* Color de las estrellas no seleccionadas */
+}
+
+.rate:not(:checked) > label::before {
+  content: '★ '; /* Utiliza una estrella como marcador en lugar de un cuadro de verificación */
+  position: relative;
+  top: -10px; /* Alinea verticalmente las estrellas */
+  left: 2px; /* Ajusta la posición horizontal de las estrellas */
+}
+
+.rate > input:checked ~ label {
+  color: #ffc700; /* Cambia el color de la estrella seleccionada */
+}
+

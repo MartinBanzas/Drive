@@ -43,7 +43,6 @@ public class FileController {
     @PostMapping("/new/upload")
     @Transactional
     public String uploadFile(Model model,
-                             @RequestParam("id")int id,
                              @RequestParam("file")MultipartFile file) {
 
         String message="";
