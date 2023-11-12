@@ -10,10 +10,10 @@ public interface FicheroService {
 
     List<Fichero> findAll();
 
-    Fichero findById(int theId);
+    Fichero findById(Long theId);
 
     void save(Fichero theSave);
 
-    void deleteById(int theId);
+    void deleteById(Long theId);
 
 }

@@ -50,7 +50,7 @@ public class FileController {
         String originalFileName = file.getOriginalFilename();
         String uniqueFileName = generateUniqueFileName(originalFileName);
 
-        archivo.setRutaarchivo(uniqueFileName);
+        archivo.setRuta(uniqueFileName);
         ficheroService.save(archivo);
 
         try {
@@ -87,9 +87,9 @@ public class FileController {
 
     @PostMapping("/delete/{id}")
     @Transactional
-    public String deleteFile(@PathVariable int id) {
+    public String deleteFile(@PathVariable Long id) {
         Fichero archivo = ficheroService.findById(id);
-        Resource file = fileStorageService.load(archivo.getRutaarchivo());
+        Resource file = fileStorageService.load(archivo.getRuta());
         fileStorageService.delete(file.getFilename());
         ficheroService.deleteById(id);
 
@@ -97,10 +97,10 @@ public class FileController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Resource> getFile(@PathVariable int id) {
+    public ResponseEntity<Resource> getFile(@PathVariable Long id) {
 
         Fichero fichero = ficheroService.findById(id);
-        Resource file = fileStorageService.load(fichero.getRutaarchivo());
+        Resource file = fileStorageService.load(fichero.getRuta());
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);

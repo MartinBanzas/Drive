@@ -9,16 +9,19 @@ public class Fichero {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name="descripcion")
     private String descripcion;
 
-    public int getId() {
+    @Column(name="ruta")
+    private String ruta;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,16 +33,13 @@ public class Fichero {
         this.descripcion = descripcion;
     }
 
-    public String getRutaarchivo() {
-        return rutaarchivo;
+    public String getRuta() {
+        return ruta;
     }
 
-    public void setRutaarchivo(String rutaarchivo) {
-        this.rutaarchivo = rutaarchivo;
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
     }
-
-    @Column(name="ruta")
-    private String rutaarchivo;
 
     public Fichero () {}
 

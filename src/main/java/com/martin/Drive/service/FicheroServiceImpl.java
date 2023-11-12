@@ -25,7 +25,7 @@ public FicheroServiceImpl (FicheroRepository ficheroRepository) {
     }
 
     @Override
-    public Fichero findById(int theId) {
+    public Fichero findById(Long theId) {
 
         Optional<Fichero> result = ficheroRepository.findById(theId);
 
@@ -47,7 +47,7 @@ public FicheroServiceImpl (FicheroRepository ficheroRepository) {
     }
 
     @Override
-    public void deleteById(int theId) {
+    public void deleteById(Long theId) {
     ficheroRepository.deleteById(theId);
 
     }
