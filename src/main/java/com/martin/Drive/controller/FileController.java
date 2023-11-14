@@ -31,8 +31,6 @@ public class FileController {
     @Autowired
     private FileStorageService fileStorageService;
 
-
-
     @GetMapping("/files")
     public String fileList(Model theModel) {
        List<Fichero> archivos = ficheroService.findAll();
