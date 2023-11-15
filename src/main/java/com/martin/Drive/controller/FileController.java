@@ -17,6 +17,9 @@ import com.martin.Drive.service.FileStorageService;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import static com.martin.Drive.utils.Utils.getFileTypeByProbeContentType;
@@ -57,7 +60,7 @@ public class FileController {
         Long size = file.getSize();
         archivo.setSize(size);
         archivo.setTipo(tipo);
-
+        archivo.setFCreacion(LocalDateTime.now());
 
         ficheroService.save(archivo);
 
