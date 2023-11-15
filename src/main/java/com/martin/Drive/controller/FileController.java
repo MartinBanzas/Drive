@@ -13,10 +13,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.martin.Drive.service.FicheroService;
 import com.martin.Drive.service.FileStorageService;
 
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+import static com.martin.Drive.utils.Utils.getFileTypeByProbeContentType;
+
 
 @Controller
 @RequestMapping("/drive")
@@ -51,6 +55,12 @@ public class FileController {
         String uniqueFileName = generateUniqueFileName(originalFileName);
 
         archivo.setRuta(uniqueFileName);
+        String tipo = getFileTypeByProbeContentType(uniqueFileName);
+        Long size = file.getSize();
+        archivo.setSize(size);
+        archivo.setTipo(tipo);
+
+
         ficheroService.save(archivo);
 
         try {
