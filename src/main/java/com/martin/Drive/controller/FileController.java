@@ -27,6 +27,7 @@ import static com.martin.Drive.utils.Utils.getFileTypeByProbeContentType;
 
 @Controller
 @RequestMapping("/drive")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FileController {
 
     private final Path root = Paths.get("./uploads");
