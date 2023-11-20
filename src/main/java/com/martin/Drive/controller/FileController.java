@@ -79,14 +79,18 @@ public class FileController {
         return "redirect:/drive/files";
     }
 
-
-
     private String generateUniqueFileName(String originalFileName) {
+        String baseName;
+        String extension = "";
+        int lastDotIndex = originalFileName.lastIndexOf('.');
+        if (lastDotIndex > 0 && lastDotIndex < originalFileName.length() - 1) {
+            baseName = originalFileName.substring(0, lastDotIndex);
+            extension = originalFileName.substring(lastDotIndex + 1);
+        } else {
 
-        String baseName = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
-        String extension = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
-        String uniqueFileName = baseName + "." + extension;
-
+            baseName = originalFileName;
+        }
+        String uniqueFileName = baseName;
         int count = 1;
         while (Files.exists(this.root.resolve(uniqueFileName))) {
             uniqueFileName = baseName + "(" + count + ")." + extension;
