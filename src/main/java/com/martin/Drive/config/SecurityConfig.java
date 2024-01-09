@@ -1,4 +1,4 @@
-package com.martin.Drive.Security;
+package com.martin.Drive.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

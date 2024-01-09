@@ -88,16 +88,16 @@ public class FileController {
             extension = originalFileName.substring(lastDotIndex + 1);
         } else {
 
-            baseName = originalFileName;
+            baseName = originalFileName+extension;
         }
         String uniqueFileName = baseName;
         int count = 1;
         while (Files.exists(this.root.resolve(uniqueFileName))) {
-            uniqueFileName = baseName + "(" + count + ")." + extension;
+            uniqueFileName = baseName + "("+count+ ")";
             count++;
         }
 
-        return uniqueFileName;
+        return uniqueFileName+"."+extension;
     }
 
 
