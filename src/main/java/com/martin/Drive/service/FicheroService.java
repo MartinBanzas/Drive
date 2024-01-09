@@ -12,7 +12,7 @@ public interface FicheroService {
 
     Fichero findById(Long theId);
 
-    void save(Fichero theSave);
+    void save(Fichero theFichero);
 
     void deleteById(Long theId);
 

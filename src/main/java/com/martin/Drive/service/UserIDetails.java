@@ -10,14 +10,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserInfoDetails implements UserDetails {
+public class UserIDetails implements UserDetails {
 
 
     String userName = null;
     String password= null;
     List<GrantedAuthority> authorities;
 
-    public UserInfoDetails(User users) {
+    public UserIDetails(User users) {
         userName = users.getUsername();
         password=users.getPassword();
         authorities = Arrays.stream(users.getRoles().split(","))

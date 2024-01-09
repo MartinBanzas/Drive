@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserInfoService implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -24,13 +24,21 @@ public class UserInfoService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> userInfo = userRepository.findByName(username);
+        Optional<User> userInfo = userRepository.findByusername(username);
 
-    return userInfo.map(UserInfoDetails::new)
+    return userInfo.map(UserIDetails::new)
             .orElseThrow(()-> new UsernameNotFoundException("No se ha encontrado usuario "+username));
+    }
+
+    public String addUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return "Usuario añadido con éxito";
     }
 
     public List<User> getAllUser() {return userRepository.findAll();}
 
     public User getUser(Long theId) {return userRepository.findById(theId).get();}
+
+
 }
