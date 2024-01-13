@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/auth")
 public class LoginController {
 
@@ -27,6 +26,7 @@ public class LoginController {
     private JwtService jwtService;
 
 
+    @CrossOrigin("http://localhost:3000")
     @PostMapping("/loginUser")
     public String addUser(@RequestBody AuthRequest authRequest){
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));

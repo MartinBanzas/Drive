@@ -22,12 +22,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@CrossOrigin(origins = "http://localhost:3000")
 @EnableMethodSecurity
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer {
 
     @Autowired
     private JwtFilter jwtFilter;
@@ -38,7 +41,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(csrf->csrf.disable())
+        return httpSecurity
+                .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers("/api/ficheroes", "/auth/addUser" ).permitAll()
                         .requestMatchers("/auth/loginUser").permitAll()
@@ -48,6 +52,8 @@ public class SecurityConfig {
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
+
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -62,7 +68,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("*"); // Permitir solicitudes desde http://localhost:3000
+        config.addAllowedOrigin("*"); // Permitir solicitudes desde cualquier sitio
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
         source.registerCorsConfiguration("/**", config);
@@ -79,4 +85,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+
 }
