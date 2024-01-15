@@ -21,7 +21,7 @@ public class JwtService {
 
     public String generateToken(String userName) {
         Map<String, Object> claims = new HashMap<>();
-
+        claims.put("username", userName);
         // 30 días de caducidad
         Date expirationDate = new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000);
 
@@ -30,7 +30,8 @@ public class JwtService {
                 .setSubject(userName)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(expirationDate)
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
+                .signWith(getSignKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
     private Key getSignKey() {

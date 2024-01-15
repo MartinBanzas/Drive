@@ -26,7 +26,7 @@ public class LoginController {
     private JwtService jwtService;
 
 
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin()
     @PostMapping("/loginUser")
     public String addUser(@RequestBody AuthRequest authRequest){
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
@@ -39,6 +39,7 @@ public class LoginController {
 
 
     @PostMapping("/addUser")
+    @CrossOrigin()
     public String addUser(@RequestBody User userInfo){
         return userService.addUser(userInfo);
 

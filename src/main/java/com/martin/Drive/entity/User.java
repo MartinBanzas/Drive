@@ -15,4 +15,6 @@ public class User {
     private String username;
     private String roles;
     private String password;
+    private String nombre;
+    private int puntuacion;
 }
