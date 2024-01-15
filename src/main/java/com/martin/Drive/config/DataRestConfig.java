@@ -1,6 +1,7 @@
 package com.martin.Drive.config;
 
 import com.martin.Drive.entity.Fichero;
+import com.martin.Drive.entity.User;
 import org.aspectj.apache.bcel.util.Repository;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -25,14 +26,13 @@ public class DataRestConfig implements RepositoryRestConfigurer {
                 HttpMethod.PUT};
 
         config.exposeIdsFor(Fichero.class);
-
+        config.exposeIdsFor(User.class);
 
         disableHttpMethods(Fichero.class, config, theUnsupportedActions);
+        disableHttpMethods(User.class, config, theUnsupportedActions);
 
 
-        /* Configure CORS Mapping */
-        cors.addMapping(config.getBasePath() + "/**")
-                .allowedOrigins(theAllowedOrigins);
+        config.getProjectionConfiguration().addProjection(UserProjection.class);
     }
 
     private void disableHttpMethods(Class theClass,

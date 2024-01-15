@@ -1,8 +1,10 @@
 package com.martin.Drive.service;
 
+import com.martin.Drive.config.UserProjection;
 import com.martin.Drive.dao.UserRepository;
 import com.martin.Drive.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,13 +24,15 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userInfo = userRepository.findByusername(username);
 
-    return userInfo.map(UserIDetails::new)
-            .orElseThrow(()-> new UsernameNotFoundException("No se ha encontrado usuario "+username));
+        return userInfo.map(UserIDetails::new)
+                .orElseThrow(()-> new UsernameNotFoundException("No se ha encontrado usuario "+username));
     }
+
 
     public String addUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -36,9 +40,15 @@ public class UserService implements UserDetailsService {
         return "Usuario añadido con éxito";
     }
 
-    public List<User> getAllUser() {return userRepository.findAll();}
+    //public List<User> getAllUser() {return userRepository.findAll();}
 
-    public User getUser(Long theId) {return userRepository.findById(theId).get();}
+    public List<UserProjection> getUsersProjection() {
+        return userRepository.findAllProjections();
+    }
+
+        //   public User getUser(Long theId) {return userRepository.findById(theId).get();}
 
 
+  //  public Optional <User> getUserByName(String nombre) {return userRepository.findBynombre(nombre);}
 }
+

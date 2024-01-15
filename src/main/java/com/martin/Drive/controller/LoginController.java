@@ -31,6 +31,7 @@ public class LoginController {
     public String addUser(@RequestBody AuthRequest authRequest){
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if(authenticate.isAuthenticated()){
+
             return jwtService.generateToken(authRequest.getUsername());
         }else {
             throw new UsernameNotFoundException("Invalid user request");
