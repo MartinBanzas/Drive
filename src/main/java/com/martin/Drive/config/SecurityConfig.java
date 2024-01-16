@@ -25,7 +25,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin()
 @EnableMethodSecurity
 public class SecurityConfig {
 

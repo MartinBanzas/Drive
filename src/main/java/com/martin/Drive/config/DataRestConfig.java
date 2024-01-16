@@ -31,6 +31,9 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(Fichero.class, config, theUnsupportedActions);
         disableHttpMethods(User.class, config, theUnsupportedActions);
 
+        cors.addMapping(config.getBasePath() + "/**")
+                .allowedOrigins(theAllowedOrigins);
+
 
         config.getProjectionConfiguration().addProjection(UserProjection.class);
     }
