@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -17,4 +19,7 @@ public class User {
     private String password;
     private String nombre;
     private int puntuacion;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL})
+    private List<UserMessages> userMessagesList;
 }

@@ -46,6 +46,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findAllProjections();
     }
 
+  //  public User updateScore(User user) {return userRepository.save(user);};
+
         //   public User getUser(Long theId) {return userRepository.findById(theId).get();}
 
 
