@@ -46,11 +46,16 @@ public class UserService implements UserDetailsService {
         return userRepository.findAllProjections();
     }
 
-  //  public User updateScore(User user) {return userRepository.save(user);};
-
+    public void updateScore(User player) {
+        Optional<User> optionalUser = userRepository.findBynombre(player.getNombre());
+        optionalUser.ifPresent(user -> {
+            user.setPuntuacion(player.getPuntuacion());
+            userRepository.save(user);
+        });
+    }
         //   public User getUser(Long theId) {return userRepository.findById(theId).get();}
 
 
-  //  public Optional <User> getUserByName(String nombre) {return userRepository.findBynombre(nombre);}
+   public Optional <User> getUserByName(String nombre) {return userRepository.findBynombre(nombre);}
 }
 

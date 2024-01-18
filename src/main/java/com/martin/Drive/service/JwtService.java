@@ -1,7 +1,11 @@
 package com.martin.Drive.service;
 
+import com.martin.Drive.dao.UserRepository;
+import com.martin.Drive.entity.User;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,11 +21,18 @@ import java.util.function.Function;
 @Component
 public class JwtService {
 
+    @Autowired
+    private UserRepository userRepository;
+
     private static final String secretKey = "ajskdfashgvhcaehdbwq3367215assjkkhbgyiuuuuttttttttttyyyyyyyyyyydtrdtrkhjzx";
 
     public String generateToken(String userName) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("username", userName);
+        User user = userRepository.findByusername(userName)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + userName));
+        // Esto vendría siendo el email en uso real claims.put("username", userName);
+       //Para Tetris:
+        claims.put("nombre", user.getNombre());
         // 30 días de caducidad
         Date expirationDate = new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000);
 

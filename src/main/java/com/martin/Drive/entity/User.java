@@ -20,6 +20,5 @@ public class User {
     private String nombre;
     private int puntuacion;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL})
-    private List<UserMessages> userMessagesList;
+
 }
