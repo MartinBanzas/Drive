@@ -33,6 +33,9 @@ public class JwtService {
         // Esto vendría siendo el email en uso real claims.put("username", userName);
        //Para Tetris:
         claims.put("nombre", user.getNombre());
+        //Para Calendario
+        claims.put("roles", user.getRoles());
+
         // 30 días de caducidad
         Date expirationDate = new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000);
 
