@@ -51,14 +51,6 @@ public class LoginController {
 
     }
 
-  /*  @CrossOrigin
-    @PatchMapping("/updateScore")
-    public ResponseEntity<?> updateScore(@RequestBody User entidadActualizada) {
 
-       User user = entidadActualizada;
-       userService.updateScore(user);
-
-        return ResponseEntity.ok().build();
-    }*/
 
 }

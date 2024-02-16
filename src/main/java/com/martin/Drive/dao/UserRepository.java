@@ -23,7 +23,5 @@ public interface UserRepository extends JpaRepository <User, Long> {
     @Query("SELECT u FROM User u")
     List<UserProjection> findAllProjections();
 
-  //  @Query("SELECT u FROM User u")
-    //UserProjection findByNombre();
 
 }
