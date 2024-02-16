@@ -41,7 +41,7 @@ public class SecurityConfig {
         return httpSecurity.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers("/api/ficheroes", "/api/users", "/auth/addUser",
-                                "/tetris/highScore", "/drive/new/upload", "/drive/files", "/drive/get/**" ).permitAll()
+                                "/tetris/highScore", "/drive/new/upload", "/drive/files", "/drive/delete/**", "/drive/get/**" ).permitAll()
                         .requestMatchers("/auth/loginUser").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

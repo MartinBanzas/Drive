@@ -27,7 +27,7 @@ import static com.martin.Drive.utils.Utils.getFileTypeByProbeContentType;
 
 @Controller
 @RequestMapping("/drive")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin()
 public class FileController {
 
     private final Path root = Paths.get("./uploads");
@@ -101,15 +101,15 @@ public class FileController {
     }
 
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @Transactional
-    public String deleteFile(@PathVariable Long id) {
+    public ResponseEntity<String> deleteFile(@PathVariable Long id) {
         Fichero archivo = ficheroService.findById(id);
         Resource file = fileStorageService.load(archivo.getRuta());
         fileStorageService.delete(file.getFilename());
         ficheroService.deleteById(id);
 
-        return "redirect:/files";
+        return ResponseEntity.ok("El fichero con ID " + id + " se ha eliminado correctamente");
     }
 
     @GetMapping("/get/{id}")
