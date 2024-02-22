@@ -19,6 +19,12 @@ public class User {
     private String password;
     private String nombre;
     private int puntuacion;
+    private int movil;
+    private String twitter;
+    private String facebook;
+    private String instagram;
+    private String bio;
+    private String avatar;
 
 
 }

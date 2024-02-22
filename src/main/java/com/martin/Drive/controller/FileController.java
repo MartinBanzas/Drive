@@ -14,6 +14,7 @@ import com.martin.Drive.service.FicheroService;
 import com.martin.Drive.service.FileStorageService;
 
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,7 +49,7 @@ public class FileController {
 
     @PostMapping("/new/upload")
     @Transactional
-    public String uploadFile(Model model,
+    public ResponseEntity<String> uploadFile(Model model,
                              @RequestParam("file")MultipartFile file) {
 
         String message="";
@@ -76,7 +77,7 @@ public class FileController {
             model.addAttribute("message", message);
         }
 
-        return "redirect:/drive/files";
+        return ResponseEntity.ok("Fichero subido correctamente");
     }
 
     private String generateUniqueFileName(String originalFileName) {
@@ -112,6 +113,24 @@ public class FileController {
         return ResponseEntity.ok("El fichero con ID " + id + " se ha eliminado correctamente");
     }
 
+    @PatchMapping("/rename/{id}")
+    @Transactional
+    public ResponseEntity<String> renameVariable(@PathVariable Long id, @RequestParam("newName") String newName) throws IOException {
+        Fichero archivo = ficheroService.findById(id);
+
+        if (archivo == null) {
+            return ResponseEntity.notFound().build();
+        }
+        Path oldPath = root.resolve(archivo.getRuta());
+        Path newPath = root.resolve(newName);
+        archivo.setRuta(newName);
+        ficheroService.save(archivo);
+        Files.move(oldPath, newPath);
+
+        return ResponseEntity.ok("El fichero con ID " + id + " se ha renombrado correctamente a " + newName);
+    }
+
+
     @GetMapping("/get/{id}")
     public ResponseEntity<Resource> getFile(@PathVariable Long id) {
 
@@ -122,7 +141,5 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
-
-    
 }
 
