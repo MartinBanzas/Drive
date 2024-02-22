@@ -13,6 +13,7 @@ public interface UserProjection {
     String getNombre();
     int getPuntuacion();
 
+    String getEmail();
     String getFacebook();
     String getTwitter();
     String getBio();
