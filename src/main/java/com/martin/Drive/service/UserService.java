@@ -23,8 +23,6 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userInfo = userRepository.findByusername(username);
@@ -40,7 +38,7 @@ public class UserService implements UserDetailsService {
         return "Usuario añadido con éxito";
     }
 
-    //public List<User> getAllUser() {return userRepository.findAll();}
+    public List<User> getAllUser() {return userRepository.findAll();}
 
     public List<UserProjection> getUsersProjection() {
         return userRepository.findAllProjections();
@@ -53,7 +51,12 @@ public class UserService implements UserDetailsService {
             userRepository.save(user);
         });
     }
-        //   public User getUser(Long theId) {return userRepository.findById(theId).get();}
+
+    public void updateUser (User user) {
+        userRepository.save(user);
+    }
+
+    public User getUser(Long theId) {return userRepository.findById(theId).get();}
 
 
    public Optional <User> getUserByName(String nombre) {return userRepository.findBynombre(nombre);}

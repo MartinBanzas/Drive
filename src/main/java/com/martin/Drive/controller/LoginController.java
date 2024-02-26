@@ -51,6 +51,20 @@ public class LoginController {
 
     }
 
+    @PatchMapping("/updateUserData/{id}")
+    @CrossOrigin()
+    public ResponseEntity <String> updateUser (@PathVariable Long id,  @RequestParam("newName") String newName,
+                                               @RequestParam("newPhone") int newPhone,
+                                               @RequestParam("newBio") String newBio) {
+        User userToBeUpdated=userService.getUser(id);
+
+        userToBeUpdated.setBio(newBio);
+        userToBeUpdated.setNombre(newName);
+        userToBeUpdated.setMovil(newPhone);
+        userService.updateUser(userToBeUpdated);
+        return ResponseEntity.ok("Usuario actualizado con éxito");
+    }
+
 
 
 }

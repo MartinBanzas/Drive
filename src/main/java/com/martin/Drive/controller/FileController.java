@@ -33,7 +33,6 @@ public class FileController {
 
     private final Path root = Paths.get("./uploads");
 
-
     @Autowired
     private FicheroService ficheroService;
 
