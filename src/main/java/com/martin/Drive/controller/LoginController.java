@@ -1,11 +1,9 @@
 package com.martin.Drive.controller;
 
-import com.martin.Drive.config.UserProjection;
 import com.martin.Drive.entity.AuthRequest;
 import com.martin.Drive.entity.User;
 import com.martin.Drive.service.JwtService;
 import com.martin.Drive.service.UserService;
-import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,12 +54,12 @@ public class LoginController {
     public ResponseEntity <String> updateUser (@PathVariable Long id,  @RequestParam("newName") String newName,
                                                @RequestParam("newPhone") int newPhone,
                                                @RequestParam("newBio") String newBio) {
-        User userToBeUpdated=userService.getUser(id);
+        User userToBeUpdated=userService.findUser(id);
 
         userToBeUpdated.setBio(newBio);
         userToBeUpdated.setNombre(newName);
         userToBeUpdated.setMovil(newPhone);
-        userService.updateUser(userToBeUpdated);
+        userService.saveUser(userToBeUpdated);
         return ResponseEntity.ok("Usuario actualizado con éxito");
     }
 

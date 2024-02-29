@@ -36,6 +36,8 @@ public class JwtService {
         //Para Calendario
         claims.put("roles", user.getRoles());
 
+        //Para Update
+        claims.put("id", user.getId());
         // 30 días de caducidad
         Date expirationDate = new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000);
 

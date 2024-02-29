@@ -4,7 +4,6 @@ import com.martin.Drive.config.UserProjection;
 import com.martin.Drive.dao.UserRepository;
 import com.martin.Drive.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -52,11 +51,11 @@ public class UserService implements UserDetailsService {
         });
     }
 
-    public void updateUser (User user) {
+    public void saveUser(User user) {
         userRepository.save(user);
     }
 
-    public User getUser(Long theId) {return userRepository.findById(theId).get();}
+    public User findUser(Long theId) {return userRepository.findById(theId).get();}
 
 
    public Optional <User> getUserByName(String nombre) {return userRepository.findBynombre(nombre);}

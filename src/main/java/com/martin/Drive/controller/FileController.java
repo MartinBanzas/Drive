@@ -1,6 +1,8 @@
 package com.martin.Drive.controller;
 
 import com.martin.Drive.entity.Fichero;
+import com.martin.Drive.entity.User;
+import com.martin.Drive.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -32,6 +34,9 @@ import static com.martin.Drive.utils.Utils.getFileTypeByProbeContentType;
 public class FileController {
 
     private final Path root = Paths.get("./uploads");
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private FicheroService ficheroService;
@@ -75,6 +80,21 @@ public class FileController {
             message = "No se ha podido guardar el fichero: " + uniqueFileName + ". Error: " + e.getMessage();
             model.addAttribute("message", message);
         }
+
+        return ResponseEntity.ok("Fichero subido correctamente");
+    }
+
+    @PostMapping("/avatar")
+    @Transactional
+    public ResponseEntity <String> uploadAvatar(@RequestParam("id") Long theId, @RequestParam("file")MultipartFile file ) {
+
+        User theUser = userService.findUser(theId);
+
+        String originalFileName = file.getOriginalFilename();
+        String uniqueFileName = generateUniqueFileName(originalFileName);
+        theUser.setAvatar(uniqueFileName);
+        userService.saveUser(theUser);
+        fileStorageService.save(file, uniqueFileName);
 
         return ResponseEntity.ok("Fichero subido correctamente");
     }
