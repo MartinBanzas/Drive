@@ -51,14 +51,14 @@ public class LoginController {
 
     @PatchMapping("/updateUserData/{id}")
     @CrossOrigin()
-    public ResponseEntity <String> updateUser (@PathVariable Long id,  @RequestParam("newName") String newName,
+    public ResponseEntity <String> updateUser (@PathVariable Long id,  @RequestParam("newEmail") String newEmail,
                                                @RequestParam("newPhone") int newPhone,
                                                @RequestParam("newBio") String newBio) {
         User userToBeUpdated=userService.findUser(id);
 
         userToBeUpdated.setBio(newBio);
-        userToBeUpdated.setNombre(newName);
         userToBeUpdated.setMovil(newPhone);
+        userToBeUpdated.setEmail(newEmail);
         userService.saveUser(userToBeUpdated);
         return ResponseEntity.ok("Usuario actualizado con éxito");
     }
